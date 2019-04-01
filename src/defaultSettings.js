@@ -5,11 +5,11 @@ module.exports = {
   contentWidth: 'Fluid', // layout of content: Fluid or Fixed, only works when layout is topmenu
   fixedHeader: false, // sticky header
   autoHideHeader: false, // auto hide header
-  fixSiderbar: false, // sticky siderbar
+  fixSiderbar: true, // sticky siderbar
   menu: {
     disableLocal: false,
   },
-  title: 'Ant Design Pro',
+  title: 'chjiyun',
   pwa: true,
   // Your custom iconfont Symbol script Url
   // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js

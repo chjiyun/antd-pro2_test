@@ -265,31 +265,36 @@ export default [
               },
             ],
           },
+          {
+            path: '/account/test',
+            name: 'test',
+            component: './Test/Test',
+          },
         ],
       },
       //  editor
-      {
-        name: 'editor',
-        icon: 'highlight',
-        path: '/editor',
-        routes: [
-          {
-            path: '/editor/flow',
-            name: 'flow',
-            component: './Editor/GGEditor/Flow',
-          },
-          {
-            path: '/editor/mind',
-            name: 'mind',
-            component: './Editor/GGEditor/Mind',
-          },
-          {
-            path: '/editor/koni',
-            name: 'koni',
-            component: './Editor/GGEditor/Koni',
-          },
-        ],
-      },
+      // {
+      //   name: 'editor',
+      //   icon: 'highlight',
+      //   path: '/editor',
+      //   routes: [
+      //     {
+      //       path: '/editor/flow',
+      //       name: 'flow',
+      //       component: './Editor/GGEditor/Flow',
+      //     },
+      //     {
+      //       path: '/editor/mind',
+      //       name: 'mind',
+      //       component: './Editor/GGEditor/Mind',
+      //     },
+      //     {
+      //       path: '/editor/koni',
+      //       name: 'koni',
+      //       component: './Editor/GGEditor/Koni',
+      //     },
+      //   ],
+      // },
       {
         component: '404',
       },

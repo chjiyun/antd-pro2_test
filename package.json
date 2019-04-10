@@ -38,6 +38,7 @@
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
+    "echarts": "^4.2.1",
     "enquire-js": "^0.2.1",
     "gg-editor": "^2.0.2",
     "lodash": "^4.17.11",
@@ -58,6 +59,7 @@
     "react-dom": "^16.7.0",
     "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
+    "react-truncate": "^2.4.0",
     "umi": "^2.4.4",
     "umi-plugin-react": "^1.7.2",
     "umi-request": "^1.0.5"

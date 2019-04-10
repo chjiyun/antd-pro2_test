@@ -1,59 +1,59 @@
 import React, { Component } from 'react';
 import echarts from 'echarts/lib/echarts';
+import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import 'echarts/lib/chart/pie';
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/legend';
 
 export default class Pie extends Component {
-  state = {
-    data: null,
-  };
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.data !== state.data) {
+  //     return {
+  //       data: props.data,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   componentDidMount() {
-    const myChart = echarts.init(this.root);
-    myChart.setOption({
-      title: {
-        text: '某站点用户访问来源',
-        subtext: '纯属虚构',
-        x: 'center',
+    window.addEventListener(
+      'resize',
+      () => {
+        this.requestRef = requestAnimationFrame(() => this.resize());
       },
-      tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)',
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
-      },
-      series: [
-        {
-          name: '访问来源',
-          type: 'pie',
-          radius: '55%',
-          center: ['50%', '60%'],
-          data: [
-            { value: 335, name: '直接访问' },
-            { value: 310, name: '邮件营销' },
-            { value: 234, name: '联盟广告' },
-            { value: 135, name: '视频广告' },
-            { value: 1548, name: '搜索引擎' },
-          ],
-          itemStyle: {
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
-            },
-          },
-        },
-      ],
-    });
+      { passive: true }
+    );
+    this.chart = echarts.init(this.root);
+    const { data } = this.props;
+    if (data) {
+      this.chart.setOption(data);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+    if (JSON.stringify(prevProps.data) !== JSON.stringify(data)) {
+      console.log('didUpdate');
+      this.chart.setOption(data, true); // 使用设置notMerge的方式不和之前的option合并
+    }
+  }
+
+  componentWillUnmount() {
+    window.cancelAnimationFrame(this.requestRef);
+    window.removeEventListener('resize', this.resize);
+    this.resize.cancel();
   }
 
   getNode = node => {
     this.root = node;
   };
 
-  resize() {}
+  @Bind()
+  @Debounce(300)
+  resize() {
+    this.chart.resize();
+  }
 
   render() {
     const { height } = this.props;

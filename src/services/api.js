@@ -124,3 +124,8 @@ export async function queryNotices(params = {}) {
 export async function getFakeCaptcha(mobile) {
   return request(`/api/captcha?mobile=${mobile}`);
 }
+
+// 新闻获取测试
+export async function getNews() {
+  return request(`/api/news`);
+}

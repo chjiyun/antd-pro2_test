@@ -278,6 +278,11 @@ export default [
             component: './Test/Stat',
           },
           {
+            path: '/test/news',
+            name: 'news',
+            component: './Test/NewsList',
+          },
+          {
             path: '/test/test',
             name: 'test',
             component: './Test/Test',

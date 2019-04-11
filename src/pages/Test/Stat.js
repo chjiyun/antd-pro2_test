@@ -36,7 +36,7 @@ const roseConfig = {
   series: [
     {
       name: '访问来源',
-      roseType: 'radius',
+      // roseType: 'radius',
       label: {
         show: true,
         formatter: '{b}: {d}%',

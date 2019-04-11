@@ -192,3 +192,28 @@ export const importCDN = (url, name) =>
     };
     document.head.appendChild(dom);
   });
+
+/**
+ *
+ * @export 合并同时间新闻
+ * @param {Array} news 新闻数组
+ * @param {string} time 分类的时间字段
+ * @returns {[Array]} 同一天的新闻组成一个数组
+ */
+export function mergeByTime(news, time) {
+  const copy = [];
+  let lastDate = '';
+  if (!Array.isArray(news) || !time) {
+    return news;
+  }
+  news.forEach(item => {
+    if (!item[time] || lastDate === moment(item[time]).format('YYYY-MM-DD')) {
+      // delete item[time];
+      copy[copy.length - 1].push(item);
+    } else {
+      lastDate = moment(item[time]).format('YYYY-MM-DD');
+      copy.push([item]);
+    }
+  });
+  return copy;
+}

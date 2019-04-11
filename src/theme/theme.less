@@ -1,0 +1,82 @@
+@import './theme-default.less';
+
+// ------ 主色调
+// 主题色、按钮、菜单选择时高亮、选中状态等
+@theme_color: @park_theme_color;
+// 导航栏背景色、header背景色
+@dark_bg: @park_dark_bg;
+// 级别次于正文，多用于表单标题等，搜索框中的按钮
+@middle_color: @park_middle_color;
+// 用于大部分文字、正文等
+@text_color: @park_text_color;
+
+// ------ 辅助色
+// 基于主题色的hover状态
+@theme_hover_color: @park_theme_hover_color;
+// 用于分割线、表格线条、搜索边框、placeholder、不可点按钮的边框
+@light_grey: @park_light_grey;
+// 仅用于页面背景色
+@body_bg: @park_body_bg;
+// 表格hover、页码选中、下拉框选中item背景色
+@table_hover_bg: @park_table_hover_bg;
+// 仅用于表头背景色
+@table_header_bg: @park_table_header_bg;
+// 仅用于侧边栏展开的菜单背景色
+@menu_expand_bg: @park_menu_expand_bg;
+// 仅用于侧边栏选中高亮的菜单背景色
+@menu_selected_bg: @park_menu_selected_bg;
+// 阴影的色值
+@shadow_color: @park_shadow_color;
+
+// ------ 文字
+// 系统名称、页面标题
+@header_lg_size: @park_header_lg_size;
+// 表格名称、段落标题
+@header_middle_size: @park_header_middle_size;
+// 正文中文字、次于正文的文字、小标题、提示性文字、链接、导航栏中的文字
+@text_size: @park_text_size;
+// 段落文本行距，详情页正文，多行文本等
+@text_line_height: @park_text_line_height;
+
+// ------ 布局
+// 路由入口页面的标题header的高度
+@component_header_height: @park_component_header_height;
+// 编辑页面按钮组footer的高度
+@edit_footer_height: @park_edit_footer_height;
+// tab下面的滑动条的宽度
+@tab_border_width: @park_tab_border_width;
+
+// ------ 板块间距
+@block_margin_width: @park_block_margin_width;
+
+// ------ 按钮
+// 按钮高度（包括padding和边框）
+@btn_radius: @park_btn_radius;
+// 按钮圆角
+@btn_height: @park_btn_height;
+// 多个按钮的左右间距，应用：在第一个按钮之后的所有按钮上应用此变量，可结合使用伪类选择器
+@btn_margin_left: @park_btn_margin_left;
+
+// ------ 控件
+// 输入框的圆角
+@input_radius: @park_input_radius;
+// 输入框的左pading
+@input_padding_left: @park_input_padding_left;
+// 提示悬浮框阴影、下拉悬浮框阴影
+@float_frame_shadow: @park_float_frame_shadow;
+// 统计表单悬浮框背景
+@graph_float_frame_shadow: @park_graph_float_frame_shadow;
+// 复选框、单选、开关、圆点等组件与文本的间距（antd默认为8px）
+@control_between_text: @park_control_between_text;
+
+// ------ 表单
+// 表格行高（antd默认行高为54）
+@table_td_height: @park_table_td_height;
+// 编辑状态表单组件每行的间隔
+@form_margin_bottom: @park_form_margin_bottom;
+
+// ------ 弹窗
+// 弹窗mask的背景色
+@popup_bg: @park_popup_bg;
+
+// 更详细的颜色和尺寸等设置请参考设计图和设计规范2.0（Designed by Julia）

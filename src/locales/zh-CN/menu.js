@@ -44,5 +44,6 @@ export default {
   'menu.editor.koni': '拓扑编辑器',
   'menu.test': '测试页',
   'menu.test.stat': '图表统计',
+  'menu.test.news': '新闻测试',
   'menu.test.test': '测试父子渲染',
 };

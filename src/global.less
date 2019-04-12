@@ -1,4 +1,5 @@
 @import '~antd/lib/style/themes/default.less';
+@import './theme/theme.less';
 
 html,
 body,
@@ -32,6 +33,8 @@ body {
 ul,
 ol {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: @screen-xs) {
@@ -48,5 +51,14 @@ ol {
         }
       }
     }
+  }
+}
+
+:global {
+  .theme-color {
+    color: @theme_color;
+  }
+  .middle-color {
+    color: @middle_color;
   }
 }

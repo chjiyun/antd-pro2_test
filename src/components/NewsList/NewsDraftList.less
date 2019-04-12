@@ -1,0 +1,21 @@
+.draftList > li {
+  position: relative;
+  width: 100%;
+  line-height: 40px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 14px;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    content: '';
+    width: 6px;
+    height: 6px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background-color: #01cae6;
+  }
+}

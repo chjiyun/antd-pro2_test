@@ -283,6 +283,11 @@ export default [
             component: './Test/NewsList',
           },
           {
+            path: '/test/policy',
+            name: 'policy',
+            component: './Test/PolicyNews',
+          },
+          {
             path: '/test/test',
             name: 'test',
             component: './Test/Test',

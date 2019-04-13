@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Alert, Tag } from 'antd';
 import themeStyle from '@/theme/theme';
 
-const SearchStatus = ({ visible = false, count, tags = [], clearSearch, closeTag }) => {
+const SearchStatus = ({ visible = false, count, tags = [], clearSearch, closeTag, style }) => {
   if (!visible) return null;
   return (
     <Alert
@@ -37,6 +37,7 @@ const SearchStatus = ({ visible = false, count, tags = [], clearSearch, closeTag
           </span>
         </Fragment>
       }
+      style={style}
     />
   );
 };

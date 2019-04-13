@@ -2,22 +2,20 @@ import React, { Component } from 'react';
 import { Card, Row, Col } from 'antd';
 import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import NewsList from '@/components/NewsList';
+import NewsList from '@/components/NewsList/PolicyNewsList';
 import SearchStatus from '@/components/NewsList/SearchStatus';
-import NewsTags from '@/components/NewsList/NewsTags';
 import NewsDraftList from '@/components/NewsList/NewsDraftList';
 import BackTop from '@/components/BackTop';
 
 @connect(({ test }) => ({
-  news: test.news,
-  tags: test.tags,
-  count: test.count,
+  policyNews: test.policyNews,
+  policyCount: test.policyCount,
 }))
-class NewsListWrapper extends Component {
+class PolicyNews extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'test/searchNews',
+      type: 'test/searchPolicyNews',
     });
   }
 
@@ -25,10 +23,14 @@ class NewsListWrapper extends Component {
     console.log('searchMore');
   };
 
+  searchByIssuer = () => {};
+
+  handleVisible = () => {};
+
   render() {
-    const { news, tags, count } = this.props;
+    const { policyNews, policyCount } = this.props;
     return (
-      <PageHeaderWrapper title="新闻组件测试" hiddenBreadcrumb>
+      <PageHeaderWrapper title="政策组件测试" hiddenBreadcrumb>
         <Card bordered={false} style={{ marginBottom: 24 }}>
           <SearchStatus
             visible
@@ -40,15 +42,16 @@ class NewsListWrapper extends Component {
           <Row gutter={48} style={{ paddingTop: 12 }}>
             <Col span={16}>
               <NewsList
-                data={news}
-                count={count}
-                emptyText="没有更多新闻了～"
+                data={policyNews}
+                count={policyCount}
+                emptyText="没有更多政策了～"
+                searchByIssuer={this.searchByIssuer}
+                handleVisible={this.handleVisible}
                 searchMore={this.searchMore}
               />
             </Col>
             <Col span={8}>
-              <NewsTags title="行业新闻" tags={tags} loading={false} />
-              <NewsDraftList data={news.slice(0, 5)} loading={false} style={{ marginTop: 40 }} />
+              <NewsDraftList data={policyNews.slice(0, 5)} style={{ marginTop: 8 }} />
             </Col>
           </Row>
         </Card>
@@ -59,4 +62,4 @@ class NewsListWrapper extends Component {
   }
 }
 
-export default NewsListWrapper;
+export default PolicyNews;

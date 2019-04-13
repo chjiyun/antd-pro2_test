@@ -4,7 +4,7 @@ import Link from 'umi/link';
 import themeStyle from '@/theme/theme';
 import styles from './NewsDraftList.less';
 
-const NewsDraftList = ({ loading, data = [] }) => {
+const NewsDraftList = ({ loading, data = [], style }) => {
   return (
     <Card
       title={
@@ -15,7 +15,7 @@ const NewsDraftList = ({ loading, data = [] }) => {
       }
       extra={<Link to="/">查看全部</Link>}
       loading={loading}
-      style={{ marginTop: 40 }}
+      style={style}
       headStyle={{ padding: 0 }}
       bodyStyle={{ padding: '20px 0 0' }}
       bordered={false}
@@ -23,8 +23,8 @@ const NewsDraftList = ({ loading, data = [] }) => {
       <ul className={styles.draftList}>
         {data.map(news => {
           return (
-            <li key={news.industryNews_id}>
-              <Link to={`/${news.industryNews_id}`} title={news.title}>
+            <li key={news.id}>
+              <Link to={`/${news.id}`} title={news.title}>
                 {news.title}
               </Link>
             </li>

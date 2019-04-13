@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Icon } from 'antd';
+import TagCloud from './TagCloud';
 import themeStyle from '@/theme/theme';
 
 const NewsTags = ({ title, loading, tags = [] }) => {
@@ -17,7 +18,7 @@ const NewsTags = ({ title, loading, tags = [] }) => {
       bodyStyle={{ minHeight: 170, padding: '20px 0 0' }}
       bordered={false}
     >
-      12312
+      <TagCloud data={tags} />
     </Card>
   );
 };

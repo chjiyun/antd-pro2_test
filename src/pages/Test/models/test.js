@@ -1,10 +1,14 @@
-import { getNews } from '@/services/api';
+import { getNews, getPolicyNews } from '@/services/api';
 
 export default {
   namespace: 'test',
 
   state: {
     news: [],
+    tags: [],
+    count: 0,
+    policyNews: [],
+    policyCount: 0,
   },
 
   effects: {
@@ -12,16 +16,47 @@ export default {
       const response = yield call(getNews, payload);
       yield put({
         type: 'save',
-        payload: response.datas.newsList,
+        payload: response.datas,
+      });
+    },
+    *searchPolicyNews({ payload }, { call, put }) {
+      const response = yield call(getPolicyNews, payload);
+      yield put({
+        type: 'savePolicy',
+        payload: {
+          policyNews: response.datas,
+          policyCount: response.count,
+        },
       });
     },
   },
 
   reducers: {
-    save(state, action) {
+    save(state, { payload }) {
+      const news = payload.newsList.map(v => {
+        return {
+          ...v,
+          id: v.industryNews_id,
+        };
+      });
       return {
         ...state,
-        news: action.payload,
+        news,
+        tags: payload.tags,
+        count: payload.count,
+      };
+    },
+    savePolicy(state, { payload }) {
+      const news = payload.policyNews.map(v => {
+        return {
+          ...v,
+          id: v.policy_id,
+        };
+      });
+      return {
+        ...state,
+        policyNews: news,
+        policyCount: payload.policyCount,
       };
     },
   },

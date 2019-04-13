@@ -129,3 +129,8 @@ export async function getFakeCaptcha(mobile) {
 export async function getNews() {
   return request(`/api/news`);
 }
+
+// 政策新闻获取测试
+export async function getPolicyNews() {
+  return request(`/api/news/policy`);
+}

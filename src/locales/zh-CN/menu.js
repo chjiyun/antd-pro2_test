@@ -45,5 +45,6 @@ export default {
   'menu.test': '测试页',
   'menu.test.stat': '图表统计',
   'menu.test.news': '新闻测试',
+  'menu.test.policy': '政策公示',
   'menu.test.test': '测试父子渲染',
 };

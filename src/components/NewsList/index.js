@@ -1,30 +1,8 @@
 import React from 'react';
-import { Row, Col, Divider, Button } from 'antd';
+import { Row, Col, Divider } from 'antd';
 import NewsItem from './NewsItem';
+import LoadMore from './LoadMore';
 import { mergeByTime } from '@/utils/utils';
-
-// 加载更多组件
-const LoadMore = ({ count, newsLength, emptyText = '', loading, searchMore }) => {
-  if (count <= 10) return null;
-  return (
-    <div>
-      <Row>
-        <Col span={21} push={2}>
-          <Divider />
-        </Col>
-      </Row>
-      <Row type="flex" justify="center">
-        {count > newsLength ? (
-          <Button type="default" className="middle-color" loading={loading} onClick={searchMore}>
-            加载更多
-          </Button>
-        ) : (
-          <span className="empty-tips">{emptyText}</span>
-        )}
-      </Row>
-    </div>
-  );
-};
 
 // 新闻列表组件
 const NewsList = ({ data = [], ...otherProps }) => {
@@ -38,7 +16,7 @@ const NewsList = ({ data = [], ...otherProps }) => {
             .filter(word => word)
         : [];
       return (
-        <div key={item.industryNews_id}>
+        <div key={item.id}>
           <Row>
             {datesIdx > 0 && index === 0 && (
               <Col span={23}>
@@ -58,10 +36,7 @@ const NewsList = ({ data = [], ...otherProps }) => {
             summary={item.summary}
             tags={tags}
             issuer={item.issuer}
-            linkTo={{
-              pathname: `/news/${item.industryNews_id}`,
-              state: 'newsList',
-            }}
+            linkTo={`/news/${item.id}`}
           />
         </div>
       );
@@ -70,7 +45,7 @@ const NewsList = ({ data = [], ...otherProps }) => {
   return (
     <section>
       {newsList}
-      <LoadMore {...otherProps} />
+      <LoadMore newsLength={data.length} colProps={{ span: 21, push: 2 }} {...otherProps} />
     </section>
   );
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Pie from '@/components/Echarts/Pie';
+import MigrationMap from '@/components/Echarts/MigrationMap';
 
 const pieConfig = {
   // title: {
@@ -76,7 +77,7 @@ class Stat extends Component {
 
     return (
       <PageHeaderWrapper title="园区统计测试" hiddenBreadcrumb>
-        <Card
+        {/* <Card
           title="饼图"
           bordered={false}
           bodyStyle={{ height: 448 }}
@@ -84,7 +85,7 @@ class Stat extends Component {
           style={{ marginBottom: 24 }}
         >
           <Pie height={400} data={pieConfig} />
-        </Card>
+        </Card> */}
         <Card
           title="限定角度范围饼图"
           bordered={false}
@@ -93,6 +94,15 @@ class Stat extends Component {
           style={{ marginBottom: 24 }}
         >
           <Pie height={400} data={roseConfig} />
+        </Card>
+        <Card
+          title="迁徙图"
+          bordered={false}
+          bodyStyle={{ height: 548 }}
+          loading={!data}
+          style={{ marginBottom: 24 }}
+        >
+          <MigrationMap height={500} data={roseConfig} />
         </Card>
       </PageHeaderWrapper>
     );

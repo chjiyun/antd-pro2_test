@@ -3,6 +3,7 @@ import { Card } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Pie from '@/components/Echarts/Pie';
 import RoseRange from '@/components/Echarts/RoseRange';
+import MigrationMap from '@/components/Echarts/MigrationMap';
 
 const colorMap = ['#ffcd64', '#fe912a', '#065381', '#34b2e4', '#65d1dd'];
 
@@ -134,6 +135,15 @@ class Stat extends Component {
         >
           <RoseRange height={400} data={roseConfig} />
         </Card>
+        {/* <Card
+          title="迁徙图"
+          bordered={false}
+          bodyStyle={{ height: 548 }}
+          loading={!data}
+          style={{ marginBottom: 24 }}
+        >
+          <MigrationMap height={500} data={roseConfig} />
+        </Card> */}
       </PageHeaderWrapper>
     );
   }

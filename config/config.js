@@ -75,6 +75,9 @@ export default {
   theme: {
     'primary-color': primaryColor,
   },
+  externals: {
+    BMap: 'BMap',
+  },
   // proxy: {
   //   '/server/api/': {
   //     target: 'https://preview.pro.ant.design/',

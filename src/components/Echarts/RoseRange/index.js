@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import echarts from 'echarts/lib/echarts';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
-import 'echarts/lib/chart/pie';
+import 'echarts/lib/chart/custom';
 import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/legend';
+import 'echarts/lib/component/polar';
+import 'echarts/lib/component/radiusAxis';
+import 'echarts/lib/component/angleAxis';
 
-export default class Pie extends Component {
+export default class RoseRange extends Component {
   // static getDerivedStateFromProps(props, state) {
   //   if (props.data !== state.data) {
   //     return {
@@ -47,6 +49,29 @@ export default class Pie extends Component {
     this.resize.cancel();
   }
 
+  renderItem = (params, api) => {
+    console.log(params, api);
+    const rectShape = echarts.graphic.clipRectByRect(
+      {
+        r: 30,
+        startAngle: 0,
+        endAngle: 30,
+      },
+      {
+        r: 30,
+        startAngle: 0,
+        endAngle: 30,
+      }
+    );
+    return (
+      rectShape && {
+        type: 'sector',
+        shape: rectShape,
+        style: api.style(),
+      }
+    );
+  };
+
   updateChart = (data, notMerge = false) => {
     const { tooltip, legend, series, ...otherProps } = data;
     // series 为数组，notMerge === true 时 echarts 取数组最后一个对象作为配置
@@ -61,28 +86,17 @@ export default class Pie extends Component {
         },
         ...tooltip,
       },
-      legend: {
-        show: false,
-        // orient: 'vertical', // horizontal
-        top: 'bottom',
-        left: 'center',
-        ...legend,
-      },
       series: [
         {
-          type: 'pie',
-          radius: '55%',
+          type: 'custom',
+          coordinateSystem: 'polar',
+          renderItem: this.renderItem,
+          // radius: '55%',
           center: ['50%', '50%'],
-          hoverOffset: 6,
-          data: [],
           itemStyle: {
-            // 图形样式
-            emphasis: {
-              // 高亮的扇区和标签样式
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
-            },
+            // emphasis: {
+            //   // 高亮的扇区和标签样式
+            // },
           },
           ...seriesTail,
         },

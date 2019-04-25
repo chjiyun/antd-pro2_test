@@ -134,3 +134,8 @@ export async function getNews() {
 export async function getPolicyNews() {
   return request(`/api/news/policy`);
 }
+
+// 政策新闻获取测试
+export async function getNewsDetail(id) {
+  return request(`/api/news/policy/detail?policy_id=${id}`);
+}

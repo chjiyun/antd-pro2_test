@@ -283,14 +283,36 @@ export default [
             component: './Test/NewsList',
           },
           {
+            path: '/test/news/:id',
+            name: 'news',
+            hideInMenu: true,
+            component: './Test/NewsDetail',
+          },
+          {
             path: '/test/policy',
             name: 'policy',
             component: './Test/PolicyNews',
           },
           {
+            path: '/test/policy/:id',
+            name: 'policy',
+            hideInMenu: true,
+            component: './Test/NewsDetail',
+          },
+          {
             path: '/test/test',
             name: 'test',
             component: './Test/Test',
+          },
+          {
+            path: '/test/table',
+            name: 'table',
+            component: './Test/Table',
+          },
+          {
+            path: '/test/rich-text',
+            name: 'rich-text',
+            component: './Test/RichTextEditor',
           },
         ],
       },

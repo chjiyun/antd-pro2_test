@@ -36,7 +36,7 @@ const NewsList = ({ data = [], ...otherProps }) => {
             summary={item.summary}
             tags={tags}
             issuer={item.issuer}
-            linkTo={`/news/${item.id}`}
+            linkTo={`/test/news/${item.id}`}
           />
         </div>
       );

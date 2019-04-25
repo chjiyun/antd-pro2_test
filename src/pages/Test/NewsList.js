@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Card, Row, Col } from 'antd';
 import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -13,7 +13,7 @@ import BackTop from '@/components/BackTop';
   tags: test.tags,
   count: test.count,
 }))
-class NewsListWrapper extends Component {
+class NewsListWrapper extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

@@ -60,7 +60,7 @@ const PolicyNews = ({ data = [], searchByIssuer, handleVisible, ...otherProps })
           summary={item.summary}
           tags={tags}
           issuer={item.issuer}
-          linkTo={`/news/${item.id}`}
+          linkTo={`/test/policy/${item.id}`}
           searchByIssuer={searchByIssuer}
           handleVisible={handleVisible}
         />

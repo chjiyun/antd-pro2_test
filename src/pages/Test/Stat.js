@@ -3,7 +3,7 @@ import { Card } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Pie from '@/components/Echarts/Pie';
 import RoseRange from '@/components/Echarts/RoseRange';
-import MigrationMap from '@/components/Echarts/MigrationMap';
+// import MigrationMap from '@/components/Echarts/MigrationMap';
 
 const colorMap = ['#ffcd64', '#fe912a', '#065381', '#34b2e4', '#65d1dd'];
 
@@ -44,48 +44,53 @@ const dataArr = [
   { value: 135, name: '视频广告' },
   { value: 1000, name: '搜索引擎' },
 ];
-const roseData = dataArr.slice(0, 2);
+const roseData = [
+  { value: 300, name: '直接访问' },
+  { value: 100, name: '邮件营销' },
+  { value: 1200, name: 'empty', silent: true, itemStyle: { color: 'rgba(0,0,0,0)' } },
+];
 const roseConfig = {
   color: colorMap,
-  polar: {},
-  angleAxis: {
-    type: 'category',
-    data: roseData.map(v => {
-      return v.name;
-    }),
-    boundaryGap: false,
-    startAngle: 180,
-    endAngle: 90,
-    splitLine: {
-      show: true,
-      lineStyle: {
-        color: '#999',
-        type: 'dashed',
-      },
-    },
-    axisLine: {
-      lineStyle: {
-        color: '#999',
-      },
-    },
-  },
-  radiusAxis: {
-    type: 'value',
-    data: roseData.map(v => {
-      return v.value;
-    }),
-    axisLine: {
-      // show: false,
-    },
-    axisLabel: {
-      rotate: 45,
-    },
-  },
+  // polar: {},
+  // angleAxis: {
+  //   type: 'category',
+  //   data: roseData.map(v => {
+  //     return v.name;
+  //   }),
+  //   boundaryGap: false,
+  //   startAngle: 180,
+  //   endAngle: 90,
+  //   splitLine: {
+  //     show: true,
+  //     lineStyle: {
+  //       color: '#999',
+  //       type: 'dashed',
+  //     },
+  //   },
+  //   axisLine: {
+  //     lineStyle: {
+  //       color: '#999',
+  //     },
+  //   },
+  // },
+  // radiusAxis: {
+  //   type: 'value',
+  //   data: roseData.map(v => {
+  //     return v.value;
+  //   }),
+  //   axisLine: {
+  //     // show: false,
+  //   },
+  //   axisLabel: {
+  //     rotate: 45,
+  //   },
+  // },
   series: [
     {
       name: '访问来源',
-      roseType: 'radius',
-      radius: [0, 100],
+      roseType: 'area',
+      // radius: [0, 100],
+      startAngle: 180,
       label: {
         show: false,
         formatter: '{b}: {d}%',
@@ -133,7 +138,7 @@ class Stat extends Component {
           loading={!data}
           style={{ marginBottom: 24 }}
         >
-          <RoseRange height={400} data={roseConfig} />
+          <Pie height={400} data={roseConfig} />
         </Card>
         {/* <Card
           title="迁徙图"

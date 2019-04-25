@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
 import moment from 'moment';
-import { richToHtml } from '@/components/BraftEditor';
+import { convertToHtml } from '@/components/BraftEditor';
 import styles from './NewsDetail.less';
 
 const layout = {
@@ -52,7 +52,7 @@ const NewsDetail = ({ loading, data = {}, prevData, nextData, searchByIssuer, ge
               <span className={styles.date}>{moment(data.issueDate).format('YYYY-MM-DD')}</span>
             )}
           </div>
-          <div className={styles.richText}>{richToHtml(data.details)}</div>
+          <div className={styles.richText}>{convertToHtml(data.details)}</div>
           {data.url && (
             <div className={styles.reference}>
               {`本文参考了多个信息来源：["${data.url}"]，如若转载请注明出处。`}

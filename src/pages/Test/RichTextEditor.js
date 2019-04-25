@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'dva';
 import { Card, Form, Button } from 'antd';
-import BraftEditor from '@/components/BraftEditor';
+import BraftEditor, { initEditorState } from '@/components/BraftEditor';
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -14,8 +15,19 @@ const formItemLayout = {
   },
 };
 
+@connect(({ test }) => ({
+  newsDetail: test.newsDetail,
+}))
 @Form.create()
 class RichTextEditor extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'test/searchNewsDetail',
+      payload: 1,
+    });
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     const {
@@ -23,7 +35,8 @@ class RichTextEditor extends Component {
     } = this.props;
     validateFields((error, values) => {
       if (!error) {
-        console.log(values.detail);
+        const details = values.details && values.details.toRAW();
+        console.log(values.details, details);
       }
     });
   };
@@ -31,22 +44,24 @@ class RichTextEditor extends Component {
   render() {
     const {
       form: { getFieldDecorator },
+      newsDetail,
     } = this.props;
+    console.log(newsDetail.details);
     return (
       <Card bordered={false}>
         <Form onSubmit={this.handleSubmit}>
           <FormItem {...formItemLayout} label="文章正文">
-            {getFieldDecorator('detail', {
+            {getFieldDecorator('details', {
+              initialValue: newsDetail.details && initEditorState(newsDetail.details),
               validateTrigger: 'onBlur',
               rules: [
                 {
-                  required: true,
+                  // required: true,
                   validator: (_, value, callback) => {
                     if (value.isEmpty()) {
-                      callback('请输入正文内容');
-                    } else {
-                      callback();
+                      return callback('请输入正文内容');
                     }
+                    return callback();
                   },
                 },
               ],

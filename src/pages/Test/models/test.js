@@ -32,12 +32,15 @@ export default {
         },
       });
     },
-    *searchNewsDetail({ payload }, { call, put }) {
+    *searchNewsDetail({ payload, callback }, { call, put }) {
       const response = yield call(getNewsDetail, payload);
-      yield put({
-        type: 'saveDetail',
-        payload: response.datas,
-      });
+      if (response && response.code === 200) {
+        yield put({
+          type: 'saveDetail',
+          payload: response.datas,
+        });
+        if (callback) callback(response.datas.data);
+      }
     },
   },
 

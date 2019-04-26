@@ -4,6 +4,7 @@ import { Card, Form, Button } from 'antd';
 import BraftEditor, { initEditorState } from '@/components/BraftEditor';
 
 const FormItem = Form.Item;
+
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -21,10 +22,17 @@ const formItemLayout = {
 @Form.create()
 class RichTextEditor extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, form, newsDetail } = this.props;
     dispatch({
       type: 'test/searchNewsDetail',
       payload: 1,
+      callback: ({ details }) => {
+        // 刷新得情况下重置该字段的 value
+        if (newsDetail.details || !details) return;
+        form.setFieldsValue({
+          details: initEditorState(details),
+        });
+      },
     });
   }
 
@@ -46,7 +54,6 @@ class RichTextEditor extends Component {
       form: { getFieldDecorator },
       newsDetail,
     } = this.props;
-    console.log(newsDetail.details);
     return (
       <Card bordered={false}>
         <Form onSubmit={this.handleSubmit}>
@@ -67,6 +74,7 @@ class RichTextEditor extends Component {
               ],
             })(<BraftEditor placeholder="请输入正文内容" />)}
           </FormItem>
+
           <Button type="primary" htmlType="submit">
             提交
           </Button>

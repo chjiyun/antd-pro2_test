@@ -11,8 +11,8 @@ import styles from './index.less';
 // 初始化表格扩展
 BraftEditor.use([
   Table({
-    defaultColumns: 3, // 默认列数
-    defaultRows: 3, // 默认行数
+    defaultColumns: 4, // 默认列数
+    defaultRows: 4, // 默认行数
     // includeEditors: ['editor-id-1'], // 指定该模块对哪些BraftEditor生效，不传此属性则对所有BraftEditor有效
     // excludeEditors: ['editor-id-2'], // 指定该模块对哪些BraftEditor无效
   }),
@@ -31,23 +31,25 @@ const hooks = {
 // 编辑器自身不带有上传功能，具体的上传功能需要通过uploadFn指定。
 // 编辑器在调用media.uploadFn时，会传入一个包含文件体、文件在媒体库的ID、进度回调、成功回调和失败回调的对象作为参数
 const uploadFn = param => {
-  const serverURL = 'http://upload-server';
+  const serverURL = '/api/file/upload';
   const xhr = new XMLHttpRequest();
   const fd = new FormData();
 
   const successFn = response => {
-    // 假设服务端直接返回文件上传后的地址
     // 上传成功后调用param.success并传入上传后的文件地址
+    console.log('response', response);
+    const res = JSON.parse(xhr.responseText);
+    if (!res || res.code !== 0) return;
     param.success({
-      url: xhr.responseText,
+      url: `/api/file/${res.data.file_id}`,
       meta: {
-        id: 'xxx',
-        title: 'xxx',
-        alt: 'xxx',
-        loop: true, // 指定音视频是否循环播放
-        autoPlay: true, // 指定音视频是否自动播放
-        controls: true, // 指定音视频是否显示控制栏
-        poster: 'http://xxx/xx.png', // 指定视频播放器的封面
+        id: res.data.filename,
+        title: param.file.name,
+        alt: param.file.name,
+        // loop: true, // 指定音视频是否循环播放
+        // autoPlay: true, // 指定音视频是否自动播放
+        // controls: true, // 指定音视频是否显示控制栏
+        // poster: 'http://xxx/xx.png', // 指定视频播放器的封面
       },
     });
   };
@@ -60,7 +62,7 @@ const uploadFn = param => {
   const errorFn = response => {
     // 上传发生错误时调用param.error
     param.error({
-      msg: 'unable to upload.',
+      msg: response ? response.msg : '上传失败',
     });
   };
 
@@ -185,6 +187,27 @@ export const initEditorState = text => {
 };
 
 export default class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
+  static getDerivedStateFromProps(props) {
+    if (props.value) {
+      console.log(props.value);
+      return {
+        value: props.value,
+      };
+    }
+    return null;
+  }
+
+  // getInstance = instance => {
+  //   this.editorInstance = instance;
+  // };
+
   handleChange = editorState => {
     const { onChange } = this.props;
     if (onChange) {
@@ -200,8 +223,9 @@ export default class Index extends Component {
   };
 
   render() {
-    const { value, placeholder } = this.props;
-    console.log(this.props);
+    const { placeholder } = this.props;
+    const { value } = this.state;
+    // console.log(value);
     return (
       <BraftEditor
         className={styles.editor}
@@ -211,6 +235,7 @@ export default class Index extends Component {
         onBlur={this.handleBlur}
         controls={controls}
         media={media}
+        // ref={this.getInstance}
         {...editorProps}
       />
     );
